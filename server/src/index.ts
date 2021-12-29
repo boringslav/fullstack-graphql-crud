@@ -3,6 +3,7 @@ import express from 'express';
 import { graphqlHTTP } from 'express-graphql';
 import cors from 'cors';
 import { createConnection } from 'typeorm';
+import { schema } from './Schema';
 
 (async () => {
 	const { PORT, DB_NAME, DB_USER, DB_PASSWORD } = process.env;
@@ -20,6 +21,11 @@ import { createConnection } from 'typeorm';
 	const app = express();
 	app.use(cors());
 	app.use(express.json());
+
+	app.use('/graphql', graphqlHTTP({
+		schema,
+		graphiql: true
+	}));
 
 	app.listen(PORT, () => {
 		console.log('Server listening on port: ', PORT);
