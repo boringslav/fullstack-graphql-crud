@@ -1,9 +1,22 @@
 import 'dotenv/config';
 import express from 'express';
+import { graphqlHTTP } from 'express-graphql';
 import cors from 'cors';
+import { createConnection } from 'typeorm';
 
 (async () => {
-	const { PORT } = process.env;
+	const { PORT, DB_NAME, DB_USER, DB_PASSWORD } = process.env;
+	
+	await createConnection({
+		type: 'mysql',
+		database: DB_NAME,
+		username: DB_USER,
+		password: DB_PASSWORD,
+		logging: true, //shows all queries in terminal
+		synchronize: true, // creates all entities in db
+		entities: []
+	});
+
 	const app = express();
 	app.use(cors());
 	app.use(express.json());
