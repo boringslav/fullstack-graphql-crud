@@ -26,3 +26,25 @@ export const DELETE_USER = {
         await Users.delete({ id });
     }
 };
+
+export const UPDATE_PASSWORD = {
+    type: UserType,
+    args: {
+        username: { type: GraphQLString },
+        oldPassword: { type: GraphQLString },
+        newPassword: {type:GraphQLString}
+    },
+    async resolve(parent: IUser, args: IUser) {
+        const { username, oldPassword, newPassword } = args;
+
+        const user = await Users.findOne({ username });
+        const dbPassword = user?.password;
+
+        if (oldPassword === dbPassword) {
+            await Users.update({username}, {password: newPassword});
+
+        } else {
+            throw new Error('PASSWORDS DO NOT MATCH 😥');
+        }
+    }
+}
