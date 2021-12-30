@@ -14,7 +14,7 @@
 		// "indent": ["error", "tab"],
 		"linebreak-style": ["error", "windows"],
 		"quotes": ["error", "single"],
-		"semi": ["error", "always"],
+		// "semi": ["error", "always", { "omitLastInOneLineBlock": true }],
 		"comma-dangle": [
 			"error",
 			{
