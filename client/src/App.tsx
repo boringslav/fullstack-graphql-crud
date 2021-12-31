@@ -1,7 +1,7 @@
+import { useState } from 'react';
 import './App.css';
+import CreateUser from './components/CreateUser';
 
-function App() {
-	return <div className="App">Hello</div>;
+export default function App() {
+	return <CreateUser />;
 }
-
-export default App;
